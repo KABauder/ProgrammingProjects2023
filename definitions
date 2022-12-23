@@ -1,0 +1,91 @@
+Definitions + questions
+
+
+----------Dec 20th-----------
+
+Cloud -> uses servers distributed throughout the world.
+server -> stores all data associated with a website.
+
+Does appending to a list add it to the end or the beginning?
+-> it adds it to the end
+
+How do I add functions to a class in Python?
+-> define the class, then for each function do
+def func(self,a,b):
+-> need to add self to it, because it adds the self as an argument?
+
+Reading lines in a file, how do you get to them?
+-> you have to open the file, iterate through the lines, then close it at the
+end
+-> you have to use 'a' to append to a file
+
+GET and POST for a server
+-> GET is used when I only want to retrieve info from a server
+-> POST is when I also want to send info to a server, like a web form
+
+SQL is a database.
+-> structured query language
+
+Email works on SMTP -> simple mail transfer protocol
+-> protocols are what are used to access servers
+
+DNS -> Domain Name Server
+-> used to access websites based on the address name
+
+FTP -> file transfer protocols
+-> for servers where users transfer files to one another
+
+Does Google, Amazon, Meta have their own data centers?
+-> They do, yes, and I've been to one at The Dalles, Oregon
+
+What happens if a data center gets destroyed? Is the data lost?
+-> the data should have nodes connected to other data centers so
+the amount of data lost is minimal; however, yes you could permanently
+wipe out some data.
+
+There is permability between text files and the python script
+-> you can touch other files from your main python script
+
+-> reading text files, writing to them
+-> in essence, changing another file through python
+
+Can you delete your own system data through a python script?
+-> you can power off the computer with a Python system script
+-> you could overload memory, but this would just require a reboot
+-> you can delete system files if you have authorization
+-> you can use a fork bomb to exponentially use memory
+
+What are cookies?
+Ways to get personal information from a user's computer
+
+
+--------------Dec 21st--------------
+What is Front End development?
+-> It uses Javascript + CSS + HTML to create what the user sees.
+
+CSS -> cascading style sheets
+Javascript -> an object oriented language that allows interactive parts of a website.
+
+API -> Application Programming Interface
+-> how two pieces of software communicate and interact with each other.
+-> clients send a request, and servers send back a response.
+-> ex: a mobile weather app sends a request to the weather database server.
+
+REST API -> Representational State Transfer
+-> a set of functions that clients can use to access server data.
+
+API integrations -> automatically update data between clients and servers.
+-> ex: photos being automatically synced to the Cloud
+
+Authentication tokens -> used to make sure an API is secure.
+
+There is communication between apps and servers
+-> the user interacts with the frontend, which connects to the backend through
+an API.
+-> Requests and responses are like a waiter or messenger.
+-> I interact with the application or website, and it sends it to the server.
+
+RESTful APIs -> should be stateless, each request is independent.
+
+Some Frontend frameworks used with HTML + CSS + Javascript
+-> React, Vue.js, Angular
