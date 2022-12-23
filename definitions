@@ -43,7 +43,7 @@ What happens if a data center gets destroyed? Is the data lost?
 the amount of data lost is minimal; however, yes you could permanently
 wipe out some data.
 
-There is permability between text files and the python script
+There is permeability between text files and the python script
 -> you can touch other files from your main python script
 
 -> reading text files, writing to them
@@ -89,3 +89,18 @@ RESTful APIs -> should be stateless, each request is independent.
 
 Some Frontend frameworks used with HTML + CSS + Javascript
 -> React, Vue.js, Angular
+
+----------Dec 23rd----------------
+DevOps
+-> allows a version to be sent to production without downtime
+
+Vim
+-> allows you to edit code from within the shell
+
+git status -> see what changes need to be commited
+git add . -> adds all documents in current working directory
+git push -f -> pushes changes, overriding the main
+git pull -> pulls from the main repository
+git init -> initializes a new local repository
+
+You have to push code to github in order to change the main repository
