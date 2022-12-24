@@ -102,5 +102,17 @@ git add . -> adds all documents in current working directory
 git push -f -> pushes changes, overriding the main
 git pull -> pulls from the main repository
 git init -> initializes a new local repository
+git remote add origin -> connects remote repository to local one
+git checkout -> goes back to an old commit
+git branch -> lists the branches
 
 You have to push code to github in order to change the main repository
+You have a local version of the repository and a main branch
+You have to make sure you fetch other peoples changes before you commit
+
+In bash:
+touch -> used to create an empty file
+echo -> a way to display text with changes
+
+
+-----------Dec 24th------------------------
