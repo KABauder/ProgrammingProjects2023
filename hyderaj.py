@@ -3,8 +3,14 @@ import time
 class Character:
 
     def __init__(self):
-
         self.get_class()
+        self.hp = 0
+        self.magic = 0
+        self.attack = 0
+        self.defense = 0
+        self.agility = 0
+        self.resistance = 0
+        self.accuracy = 0
 
     def get_class(self):
         temp = True
@@ -32,6 +38,13 @@ class Character:
     def intro_stats(self):
 
         if self.char_class == "warrior":
+            self.hp = 10
+            self.magic = 0
+            self.attack = 5
+            self.defense = 5
+            self.agility = 3
+            self.resistance = 1
+            self.accuracy = 3
             text("HP: 10")
             text("Magic: 0")
             text("Attack: 5")
@@ -41,6 +54,13 @@ class Character:
             text("Accuracy: 3")
 
         elif self.char_class == "priest":
+            self.hp = 10
+            self.magic = 5
+            self.attack = 1
+            self.defense = 2
+            self.agility = 4
+            self.resistance = 4
+            self.accuracy = 2
             text("HP: 10")
             text("Magic: 5")
             text("Attack: 1")
@@ -50,6 +70,13 @@ class Character:
             text("Accuracy: 2")
 
         elif self.char_class == "archer":
+            self.hp = 10
+            self.magic = 1
+            self.attack = 3
+            self.defense = 3
+            self.agility = 4
+            self.resistance = 1
+            self.accuracy = 1
             text("HP: 10")
             text("Magic: 1")
             text("Attack: 3")
@@ -57,6 +84,15 @@ class Character:
             text("Agility: 4")
             text("Resistance: 1")
             text("Accuracy: 1")
+
+    def update_stats(self,hp,magic,attack,defense,agility,resistance,accuracy):
+        self.hp = hp
+        self.magic = magic
+        self.attack = attack
+        self.defense = defense
+        self.agility = agility
+        self.resistance = resistance
+        self.accuracy = accuracy
 
 class Monster:
 
@@ -73,12 +109,45 @@ def text(line):
     print(line)
 
 #Text based RPG
-def intro():
+def newgame():
     text("-----------------------------------------------------")
     text("-----------------------------------------------------")
     text("-----------------------HYDERAJ-----------------------")
     text("-----------------------------------------------------")
     text("-----------------------------------------------------")
+    newgame = input("New game or continue? new / continue ")
+    temp = False
+    while temp == False:
+        if newgame == "new":
+            text("Creating a new game...")
+            name = input("What do you want to call your save file? ")
+            file1 = open(name,"a")
+            file1.write("1")
+            file1.close()
+            temp = True
+
+        elif newgame == "continue":
+            savefile = input("input the name of your save file ")
+            file1 = open(savefile,"r+")
+            #get dictionary
+            save_dict = {}
+            for line in file1:
+                dict_temp = ""
+                key_temp = ""
+                dict_temp = line.split(":")[0]
+                key_temp = line.split(":")[1]
+                key_temp = key_temp[:-1]
+                save_dict[dict_temp] = key_temp
+
+            #go to location
+            temp = True
+        else:
+            text("please input a proper response")
+
+    print("save_dict",save_dict)
+    return save_dict
+
+def intro():
     text("Your eyes dimly adjust to the bright light on a sunny beach...")
     text("You look to see palm trees and hear seagulls in the distance")
     text("As you grogilly wake up, you hear a voice in your mind")
@@ -133,12 +202,24 @@ def ending():
     text("It seems to indicate that you are at the end of your journey")
     text("\"You have reached the end of Hyderaj. Congratulations!\"")
 
-intro()
-character = Character()
-character.intro_stats()
-path = branching_paths()
-if path == "jungle":
-    monster1()
-else:
-    monster2()
-ending()
+def game_path():
+    save_dict = newgame()
+    location = int(save_dict["location"])
+    while location <= 3:
+        if location == 1:
+            intro()
+            character = Character()
+            character.intro_stats()
+            location +=1
+        elif location == 2:
+            path = branching_paths()
+            if path == "jungle":
+                monster1()
+            else:
+                monster2()
+            location +=1
+        elif location == 3:
+            ending()
+            location +=1
+
+game_path()

@@ -1,0 +1,8 @@
+location:2
+HP: 10
+Magic: 0
+Attack: 5
+Defense: 5
+Agility: 3
+Resistance: 1
+Accuracy: 3
