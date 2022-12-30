@@ -121,4 +121,20 @@ github-> you have to commit your changes before you push to origin main
 IDE -> Interactive development environment like Pycharm
 
 
------------Dec 26th------------------------
+-----------Dec 27th------------------------
+
+An array is a collection of items of the same data type.
+
+map() function applies a function to each number in a list.
+
+You can convert an integer to a list or string and then back again in order
+to work with it.
+-> ex: 1234 --> "1234" --> [1,2,3,4] --> 1234
+
+int() can take two arguments, the second will set the base.
+
+------------Dec 30th-----------------------
+You can't make a variable with the name "class", as that is reserved for Python.
+
+You can't add two values of different types in Python.
+-> ex: print("falafel" + 1950)

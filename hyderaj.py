@@ -3,7 +3,6 @@ import time
 class Character:
 
     def __init__(self):
-        self.get_class()
         self.hp = 0
         self.magic = 0
         self.attack = 0
@@ -11,6 +10,10 @@ class Character:
         self.agility = 0
         self.resistance = 0
         self.accuracy = 0
+        self.char_class = "warrior"
+        self.level = 1
+        self.exp = 0
+        self.location = 1
 
     def get_class(self):
         temp = True
@@ -85,7 +88,7 @@ class Character:
             text("Resistance: 1")
             text("Accuracy: 1")
 
-    def update_stats(self,hp,magic,attack,defense,agility,resistance,accuracy):
+    def update_stats(self,hp,magic,attack,defense,agility,resistance,accuracy,char_class,level,exp):
         self.hp = hp
         self.magic = magic
         self.attack = attack
@@ -93,15 +96,124 @@ class Character:
         self.agility = agility
         self.resistance = resistance
         self.accuracy = accuracy
+        self.char_class = char_class
+        self.level = level
+        self.exp = exp
+
+    def add_exp(self,exp):
+        exp = int(exp)
+        self.exp += exp
+
+        if exp >= 50 and self.level < 2:
+            text("You are level 2!")
+            self.level = 2
+            self.level_up()
+
+        if exp >= 150 and self.level < 3:
+            text("You are level 3!")
+            self.level = 3
+            self.level_up()
+
+        if exp >= 300 and self.level < 4:
+            text("You are level 4!")
+            self.level = 4
+            self.level_up()
+
+        if exp >= 500 and self.level < 5:
+            text("You are level 5!")
+            self.level = 5
+            self.level_up()
+
+        if exp >= 750 and self.level < 6:
+            text("You are level 6!")
+            self.level = 6
+            self.level_up()
+
+        if exp >= 1050 and self.level < 7:
+            text("You are level 7!")
+            self.level = 7
+            self.level_up()
+
+        if exp >= 1450 and self.level < 8:
+            text("You are level 8!")
+            self.level = 8
+            self.level_up()
+
+        if exp >= 1950 and self.level < 9:
+            text("You are level 9!")
+            self.level = 9
+            self.level_up()
+
+        if exp >= 2500 and self.level < 10:
+            text("You are level 10!")
+            self.level = 10
+            self.level_up()
+
+    def level_up(self):
+
+        if self.char_class=="warrior":
+            self.hp += 2
+            self.magic += 1
+            self.attack += 2
+            self.defense += 2
+            self.agility += 2
+            self.resistance += 1
+            self.accuracy += 2
+
+        if self.char_class=="archer":
+            self.hp += 2
+            self.magic += 1
+            self.attack += 2
+            self.defense += 2
+            self.agility += 2
+            self.resistance += 1
+            self.accuracy += 2
+
+        if self.char_class=="priest":
+            self.hp += 2
+            self.magic += 2
+            self.attack += 1
+            self.defense += 1
+            self.agility += 2
+            self.resistance += 2
+            self.accuracy += 2
+
+    def save_data(self):
+
+        lines = ""
+        lines += "location:" + str(self.location) + "\n"
+        lines += "class:" + str(self.char_class) + "\n"
+        lines += "hp:" + str(self.hp) + "\n"
+        lines += "magic:" + str(self.magic) + "\n"
+        lines += "attack:" + str(self.attack) + "\n"
+        lines += "defense:" + str(self.defense) + "\n"
+        lines += "agility:" + str(self.agility) + "\n"
+        lines += "resistance:" + str(self.resistance) + "\n"
+        lines += "accuracy:" + str(self.accuracy) + "\n"
+        lines += "level:" + str(self.level) + "\n"
+        lines += "exp:" + str(self.exp) + "\n"
+
+        return lines
+
+    def change_location(self,new):
+        self.location = new
+
+    def get_location(self):
+        return self.location
+
 
 class Monster:
 
-    def __init__(self,name):
+    def __init__(self,name,exp):
         self.name = name
+        self.exp = exp
         self.fight_monster()
 
     def fight_monster(self):
         print("You are fighting a",self.name)
+
+    def defeat_monster(self):
+        print("You got %d experience points" % self.exp)
 
 def text(line):
     #takes the text and spaces out the time
@@ -117,20 +229,21 @@ def newgame():
     text("-----------------------------------------------------")
     newgame = input("New game or continue? new / continue ")
     temp = False
+    save_file = False
     while temp == False:
         if newgame == "new":
             text("Creating a new game...")
             name = input("What do you want to call your save file? ")
-            file1 = open(name,"a")
-            file1.write("1")
+            file1 = open(name,"w")
             file1.close()
             temp = True
+            save_dict={"location":1,"class":"","hp":0,"magic":0,"attack":0,"defense":0,"agility":0,"resistance":0,"accuracy":0,"level":1,"exp":0}
 
         elif newgame == "continue":
             savefile = input("input the name of your save file ")
             file1 = open(savefile,"r+")
-            #get dictionary
             save_dict = {}
+            #get dictionary
             for line in file1:
                 dict_temp = ""
                 key_temp = ""
@@ -141,11 +254,20 @@ def newgame():
 
             #go to location
             temp = True
+            file1.close()
+            save_file = True
         else:
             text("please input a proper response")
 
-    print("save_dict",save_dict)
-    return save_dict
+    return save_dict, save_file
+
+def save_game(character,location):
+    temp = False
+    name = input("What is the name of your savefile? ")
+    file = open(name,"w")
+    save_data = character.save_data()
+    file.writelines(save_data)
+    file.close()
 
 def intro():
     text("Your eyes dimly adjust to the bright light on a sunny beach...")
@@ -182,8 +304,11 @@ def monster1():
     text("Suddenly a creature falls from the trees")
     text("It's a Naga! A female being with the body of a snake")
     text("...")
-    naga = Monster("Naga")
+    naga = Monster("Naga",100)
+    naga.defeat_monster()
     text("You defeat the Naga")
+    exp = 100
+    return exp
 
 def monster2():
     text("...")
@@ -192,8 +317,11 @@ def monster2():
     text("You begin to feel the presence of other creatures behind the rocks")
     text("Suddenly a goblin pops out from behind a rock!")
     text("...")
-    goblin = Monster("Goblin")
+    goblin = Monster("Goblin",50)
+    goblin.defeat_monster()
     text("You defeat the goblin")
+    exp = 50
+    return exp
 
 def ending():
     text("...")
@@ -202,24 +330,54 @@ def ending():
     text("It seems to indicate that you are at the end of your journey")
     text("\"You have reached the end of Hyderaj. Congratulations!\"")
 
+def final_end():
+    text("-----------------------------------------------------")
+    text("-----------------------THE END-----------------------")
+    text("-----------------------------------------------------")
+    text("-----------------created by Kyle Bauder--------------")
+    text("-----------------------------------------------------")
+
 def game_path():
-    save_dict = newgame()
+    save_dict, save_file = newgame()
     location = int(save_dict["location"])
+    character = Character()
+    #get whether continuing a save file or not
+
+    save_file = False
     while location <= 3:
         if location == 1:
+            character.get_class()
             intro()
-            character = Character()
             character.intro_stats()
-            location +=1
+            character.change_location(2)
+            location = character.get_location()
+            save_game(character,location)
         elif location == 2:
+            if save_file == True:
+                character.update_stats(int(save_dict["hp"]),int(save_dict["magic"]),int(save_dict["attack"]), \
+                int(save_dict["defense"]),int(save_dict["agility"]),int(save_dict["resistance"]), \
+                int(save_dict["accuracy"]),str(save_dict["class"]),int(save_dict["level"]),int(save_dict["exp"]))
             path = branching_paths()
             if path == "jungle":
-                monster1()
+                exp = monster1()
+                character.add_exp(exp)
             else:
-                monster2()
-            location +=1
+                exp = monster2()
+                character.add_exp(exp)
+            character.change_location(3)
+            location = character.get_location()
+            save_game(character,location)
         elif location == 3:
+            if save_file == True:
+                character.update_stats(int(save_dict["hp"]),int(save_dict["magic"]),int(save_dict["attack"]), \
+                int(save_dict["defense"]),int(save_dict["agility"]),int(save_dict["resistance"]), \
+                int(save_dict["accuracy"]),str(save_dict["class"]),int(save_dict["level"]),int(save_dict["exp"]))
             ending()
-            location +=1
+            character.change_location(4)
+            location = character.get_location()
+            save_game(character,location)
+
+
+    final_end()
 
 game_path()

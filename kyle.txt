@@ -1,8 +1,11 @@
-location:2
-HP: 10
-Magic: 0
-Attack: 5
-Defense: 5
-Agility: 3
-Resistance: 1
-Accuracy: 3
+location:4
+class:warrior
+hp:2
+magic:1
+attack:2
+defense:2
+agility:2
+resistance:1
+accuracy:2
+level:2
+exp:50
