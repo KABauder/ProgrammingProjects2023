@@ -138,3 +138,6 @@ You can't make a variable with the name "class", as that is reserved for Python.
 
 You can't add two values of different types in Python.
 -> ex: print("falafel" + 1950)
+
+
+--------------------------------------------------

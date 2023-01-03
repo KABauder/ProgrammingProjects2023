@@ -3,6 +3,8 @@ import time
 class Character:
 
     def __init__(self):
+        self.current_hp = 0
+        self.current_magic = 0
         self.hp = 0
         self.magic = 0
         self.attack = 0
@@ -201,12 +203,37 @@ class Character:
     def get_location(self):
         return self.location
 
+    def get_agility(self):
+        return self.agility
+
+    def get_attack(self):
+        return self.attack
+
+    def get_defense(self):
+        return self.defense
+
+    def get_current_hp(self):
+        return self.current_hp
+
+    def get_hp(self):
+        return self.hp
+
+    def update_hp(self,hp):
+        self.current_hp = hp
+
 
 class Monster:
 
-    def __init__(self,name,exp):
+    def __init__(self,name,exp,hp,magic,attack,defense,agility,resistance,accuracy):
         self.name = name
         self.exp = exp
+        self.hp = hp
+        self.magic = magic
+        self.attack = attack
+        self.defense = defense
+        self.agility = agility
+        self.resistance = resistance
+        self.accuracy = accuracy
         self.fight_monster()
 
     def fight_monster(self):
@@ -214,6 +241,63 @@ class Monster:
 
     def defeat_monster(self):
         print("You got %d experience points" % self.exp)
+
+    def get_attack(self):
+        return self.attack
+
+    def get_defense(self):
+        return self.defense
+
+    def get_name(self):
+        return self.name
+
+    def get_current_hp(self):
+        return self.current_hp
+
+    def update_hp(self,hp):
+        self.current_hp = hp
+
+class Battle:
+
+    def __init__(self,character,enemy):
+        self.turn = 0
+        if character.get_agility >= enemy.get_agility:
+            self.current_turn = 0
+            self.player_turn()
+        else:
+            self.current_turn = 1
+            self.enemy_turn()
+
+    def enemy_turn(self):
+        #enemy does some kind of move, let's just start with a basic Attack
+        text("%d attacks!" % enemy.get_name())
+        hp = character.get_current_hp() - (enemy.get_attack() - character.get_defense())
+        if hp <= 0:
+            hp = 0
+        character.update_hp(hp)
+        text("%d / %d HP" % character.get_current_hp(), character.get_hp())
+        if character.get_current_hp() == 0:
+            self.player_defeated()
+        else:
+            self.player_turn()
+
+    def player_turn(self):
+        text("Character attacks!")
+        hp = enemy.get_current_hp() - (character.get_attack() - enemy.get_defense())
+        if hp <= 0:
+            hp = 0
+        enemy.update_hp(hp)
+        if enemy.get_current_hp() == 0:
+            self.enemy_defeated()
+        else:
+            self.enemy_turn()
+
+    def player_defeated(self):
+        text("Your character died in battle! ")
+
+    def enemy_defeated(self):
+        text("You killed the %d" % enemy.get_name())
+
 
 def text(line):
     #takes the text and spaces out the time
@@ -296,7 +380,7 @@ def branching_paths():
 
     return path
 
-def monster1():
+def monster1(character):
     #in the dark jungle
     text("...")
     text("As you walk through the jungle, your eyes adjust to the darkness")
@@ -304,7 +388,8 @@ def monster1():
     text("Suddenly a creature falls from the trees")
     text("It's a Naga! A female being with the body of a snake")
     text("...")
-    naga = Monster("Naga",100)
+    naga = Monster("Naga",100,4,3,3,3,2,3,2)
+    battle = Battle(naga,character)
     naga.defeat_monster()
     text("You defeat the Naga")
     exp = 100
@@ -317,7 +402,7 @@ def monster2():
     text("You begin to feel the presence of other creatures behind the rocks")
     text("Suddenly a goblin pops out from behind a rock!")
     text("...")
-    goblin = Monster("Goblin",50)
+    goblin = Monster("Goblin",50,5,0,3,3,2,0,2)
     goblin.defeat_monster()
     text("You defeat the goblin")
     exp = 50
@@ -359,7 +444,7 @@ def game_path():
                 int(save_dict["accuracy"]),str(save_dict["class"]),int(save_dict["level"]),int(save_dict["exp"]))
             path = branching_paths()
             if path == "jungle":
-                exp = monster1()
+                exp = monster1(character)
                 character.add_exp(exp)
             else:
                 exp = monster2()
