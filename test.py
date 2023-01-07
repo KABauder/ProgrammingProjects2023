@@ -142,4 +142,36 @@ def recursive(x,y,num):
         recursive(x*y,x*y,num-1)
         recursive(x*y,x*y,num-1)
 
-recursive(3,3,3)
+#recursive(3,3,3)
+
+class node:
+
+    def __init__(self,data=None):
+        self.data = data
+        self.next = None
+
+class linked_list:
+
+    def __init__(self):
+        self.head=node()
+
+    def append(self,data):
+        new_node = node(data)
+        cur_node = self.head
+        while cur_node.next!=None:
+            cur_node=cur_node.next
+        cur_node.next=new_node
+
+    def display(self):
+        elems = []
+        cur_node = self.head
+        while cur_node.next!=None:
+            cur_node=cur_node.next
+            elems.append(cur_node.data)
+        print(elems)
+
+my_list = linked_list()
+my_list.display() #should show nothing
+my_list.append(5)
+my_list.append(15)
+my_list.display()

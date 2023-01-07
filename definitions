@@ -140,4 +140,8 @@ You can't add two values of different types in Python.
 -> ex: print("falafel" + 1950)
 
 
---------------------------------------------------
+----------------Jan 7th----------------------------------
+
+Linked Lists are a way of storing data based on nodes which point to a next node.
+single linked list -> point only to the next node
+doubly linked list -> points backwards to the node behind it as well
