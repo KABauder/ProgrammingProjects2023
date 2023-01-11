@@ -170,8 +170,8 @@ class linked_list:
             elems.append(cur_node.data)
         print(elems)
 
-my_list = linked_list()
-my_list.display() #should show nothing
-my_list.append(5)
-my_list.append(15)
-my_list.display()
+#my_list = linked_list()
+#my_list.display() #should show nothing
+#my_list.append(5)
+#my_list.append(15)
+#my_list.display()

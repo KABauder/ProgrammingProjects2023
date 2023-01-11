@@ -145,3 +145,19 @@ You can't add two values of different types in Python.
 Linked Lists are a way of storing data based on nodes which point to a next node.
 single linked list -> point only to the next node
 doubly linked list -> points backwards to the node behind it as well
+
+
+A binary search tree has nodes with different elements, sorting them
+like a tree based on whether the values are smaller or larger than each
+element.
+
+----------------Jan 10th----------------------------------
+If you can go up steps either 1 or 2 at a time, calculate the steps
+for a number.
+1 -> 1
+2 -> 2 (1 s + 1s or 2s)
+3 -> 3 (1s 1s 1s + 1s 2s + 2s 1s)
+4 -> 5
+
+To solve this, we have to use a fibonnaci sequence:
+tab[i] = tab[i-1] + tab[i-2]
