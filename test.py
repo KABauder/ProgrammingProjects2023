@@ -175,3 +175,12 @@ class linked_list:
 #my_list.append(5)
 #my_list.append(15)
 #my_list.display()
+
+def to_binary(num):
+    if num >= 1:
+        to_binary(num//2)
+
+    print(num%2,end="")
+
+
+#to_binary(168)

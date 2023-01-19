@@ -161,3 +161,16 @@ for a number.
 
 To solve this, we have to use a fibonnaci sequence:
 tab[i] = tab[i-1] + tab[i-2]
+
+The enumerate() function takes a list and adds an iteration to it:
+ex: listo = ["dog","cat","bat"]
+
+print(list(enumerate(listo)))
+[(0, 'dog'), (1, 'cat'), (2, 'bat')]
+
+----------------Jan 18th----------------------------------
+lambda is a function that can do an operation in a single line.
+
+calc = lambda x: True if x == 0 else False
+calc(0) //True
+calc(1) //False
